@@ -26,4 +26,7 @@ deb=$(cd .. && ls *.deb)
 scp ../$deb debs@packages.c2x.io:
 ssh debs@packages.c2x.io "reprepro -b develop includedeb trusty $deb ; rm $deb" || true
 
+# cleanup for non-root user to be able to remove the folder
+debian/rules clean
+
 # done.

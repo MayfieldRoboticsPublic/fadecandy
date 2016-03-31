@@ -27,12 +27,13 @@ script:
   - |
     if [ "$ARCH" = "arm" ]; then
       ssh -o StrictHostKeyChecking=no -A -p 12422 vpn.mayrobo.com \
-      "git clone https://github.com/$TRAVIS_REPO_SLUG -b debian ; \
-         docker run --rm \
+      "test -d $repo && rm -rf $repo; \
+       git clone https://github.com/$TRAVIS_REPO_SLUG -b debian && \
+       docker run --rm \
                -v \$PWD/$repo:/root/$repo \
                -v \$SSH_AUTH_SOCK:/ssh-agent -e SSH_AUTH_SOCK=/ssh-agent armv7/armhf-ubuntu:14.04.3 \
-               /root/$repo/build-deb.sh \
-         && rm -rf $repo"
+               /root/$repo/build-deb.sh &&\
+       rm -rf $repo"
     elif [ "$ARCH" = "x86" ]; then
       docker run --rm \
       -v $SSH_AUTH_SOCK:/ssh-agent -e SSH_AUTH_SOCK=/ssh-agent \
