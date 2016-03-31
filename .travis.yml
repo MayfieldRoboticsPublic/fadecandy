@@ -18,10 +18,7 @@ notifications:
     on_failure: change
 
 install:
-  - $DOCKER_READONLY
-  - sh -c "$MFR_READONLY"
-  - eval "$(ssh-agent)"
-  - ssh-add
+  - $MFR_READONLY
 
 script:
   - repo=$(echo $TRAVIS_REPO_SLUG | cut -d/ -f2)
