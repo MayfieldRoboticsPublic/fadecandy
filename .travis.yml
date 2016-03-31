@@ -18,7 +18,9 @@ notifications:
     on_failure: change
 
 install:
-  - $MFR_READONLY
+  - sh -c "$MFR_READONLY"
+  - eval "$(ssh-agent)"
+  - ssh-add
 
 script:
   - repo=$(echo $TRAVIS_REPO_SLUG | cut -d/ -f2)
