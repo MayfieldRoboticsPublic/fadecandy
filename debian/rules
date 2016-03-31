@@ -1,0 +1,8 @@
+#!/usr/bin/make -f
+
+binary:
+	cd server && debian/rules binary
+	mv *.deb ../
+
+%:
+	cd server && debian/rules $@

@@ -1,0 +1,17 @@
+Source: fadecandy-server
+Section: extra
+Priority: optional
+Maintainer: Paul Mathieu <paul@mayfieldrobotics.com>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.4
+Homepage: https://github.com/scanlime/fadecandy
+
+Package: fadecandy-server
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Easy to use open source hardware to drive WS2811 LEDs with high-quality color
+ Fadecandy is a project that makes LED art easier, tastier, and more creative.
+ We're all about creating tools that remove the technical drudgery from making LED art,
+ freeing you to do more interesting, nuanced, and creative things.
+ We think LEDs are more than just trendy display devices, we think of them as programmable
+ light for interactive art.
