@@ -29,7 +29,7 @@ script:
       ssh -o StrictHostKeyChecking=no -A -p 12422 vpn.mayrobo.com \
         "git clone https://github.com/$TRAVIS_REPO_SLUG && \
          docker run --rm \
-               -v \$PWD:$repo:/root/$repo \
+               -v \$PWD/$repo:/root/$repo \
                -v \$SSH_AUTH_SOCK:/ssh-agent -e SSH_AUTH_SOCK=/ssh-agent armv7/armhf-ubuntu:14.04.3 \
                /root/$repo/build-deb.sh \
          && rm -rf $repo"
