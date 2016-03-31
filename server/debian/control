@@ -2,7 +2,7 @@ Source: fadecandy-server
 Section: extra
 Priority: optional
 Maintainer: Paul Mathieu <paul@mayfieldrobotics.com>
-Build-Depends: debhelper (>= 8.0.0)
+Build-Depends: debhelper (>= 8.0.0), python (>= 2.6.0), git (>= 1.8.0)
 Standards-Version: 3.9.4
 Homepage: https://github.com/scanlime/fadecandy
 
