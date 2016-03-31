@@ -1,0 +1,42 @@
+services:
+  - docker
+
+branches:
+  only:
+    - debian
+
+env:
+  matrix:
+    - ARCH=arm
+    - ARCH=x86
+
+notifications:
+  email:
+    recipients:
+      - dev@mayfieldrobotics.com
+    on_success: change
+    on_failure: change
+
+install:
+  - $DOCKER_READONLY
+  - sh -c "$MFR_READONLY"
+  - eval "$(ssh-agent)"
+  - ssh-add
+
+script:
+  - repo=$(echo $TRAVIS_REPO_SLUG | cut -d/ -f2)
+  - if [ "$ARCH" = "arm" ]; then
+      ssh -o StrictHostKeyChecking=no -A -p 12422 vpn.mayrobo.com \
+        sh -c "git clone https://github.com/$TRAVIS_REPO_SLUG && \
+               docker run --rm \
+               -v \$PWD:$repo:/root/$repo \
+               -v \$SSH_AUTH_SOCK:/ssh-agent -e SSH_AUTH_SOCK=/ssh-agent ubuntu:trusty \
+               /root/$repo/build-deb.sh \
+               && rm -rf $repo"
+      elif [ "$ARCH" = "x86" ]; then
+        docker run --rm \
+        -v $SSH_AUTH_SOCK:/ssh-agent -e SSH_AUTH_SOCK=/ssh-agent \
+        -v $TRAVIS_BUILD_DIR:/root/$repo \
+        ubuntu:trusty /root/$repo/build-deb.sh
+      fi
+    fi
