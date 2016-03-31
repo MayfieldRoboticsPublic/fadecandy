@@ -24,6 +24,6 @@ debian/rules binary
 # upload
 deb=$(cd .. && ls *.deb)
 scp ../$deb debs@packages.c2x.io:
-ssh debs@packages.c2x.io "reprepro -b develop includedeb trusty $deb && rm $deb"
+ssh debs@packages.c2x.io "reprepro -b develop includedeb trusty $deb ; rm $deb" || true
 
 # done.
