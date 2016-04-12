@@ -28,5 +28,6 @@ ssh debs@packages.c2x.io "reprepro -b develop includedeb trusty $deb ; rm $deb" 
 
 # cleanup for non-root user to be able to remove the folder
 debian/rules clean
+find . -user root | xargs rm -rf
 
 # done.
